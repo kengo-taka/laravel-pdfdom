@@ -13,18 +13,23 @@
     <form id="myForm" action="{{ route('dompdf.generate-pdf') }}" method="post">
         @csrf
         <label for="company_name">会社名:</label><br>
-        <input type="text" id="company_name" name="company_name" value="{{ old('company_name') }}"><br>
+        <input type="text" id="company_name" name="company_name"><br>
         @error('company_name')
             <span style="color: red;">{{ $message }}</span><br>
         @enderror
         <label for="name">名前:</label><br>
-        <input type="text" id="name" name="name" value="{{ old('name') }}"><br>
+        <input type="text" id="name" name="name"><br>
         @error('name')
             <span style="color: red;">{{ $message }}</span><br>
         @enderror
         <label for="email">メールアドレス:</label><br>
-        <input type="email" id="email" name="email" value="{{ old('email') }}"><br><br>
+        <input type="email" id="email" name="email"><br><br>
         @error('email')
+            <span style="color: red;">{{ $message }}</span><br>
+        @enderror
+        <label for="date">日付:</label><br>
+        <input type="date" id="date" name="date"><br><br>
+        @error('date')
             <span style="color: red;">{{ $message }}</span><br>
         @enderror
         <input type="submit" value="次へ">

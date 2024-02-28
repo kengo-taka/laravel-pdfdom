@@ -11,7 +11,7 @@
 <style>
     /* dompdf日本語文字化け対策 */
     /* タグによって太さが違うため、それに応じて全てにfont-faceを書く必要あり */
-    
+
     @font-face {
         font-family: ipaexg;
         font-style: normal;
@@ -38,7 +38,7 @@
     textarea {
         font-family: ipaexg, saÏns-serif;
     }
-
+    
     h2 {
         text-align: center;
         margin-bottom: 20px;
@@ -73,6 +73,7 @@
 
 <body>
     <h2>請求書</h2>
+    <p>日付: {{ $date }}</p>
     <p>会社名: {{ $company_name }}</p>
     <p>名前: {{ $name }}</p>
     <p>メールアドレス: {{ $email }}</p>
