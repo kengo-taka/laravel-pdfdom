@@ -22,3 +22,4 @@ Route::get('/', function () {
 });
 
 Route::post('/dompdf/pdf', [DompdfController::class,'generatePDF'])->name('dompdf.generate-pdf');
+Route::post('/dompdf/html', [DompdfController::class,'showHTML'])->name('dompdf.show-html');

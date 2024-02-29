@@ -38,36 +38,35 @@
     textarea {
         font-family: ipaexg, saÏns-serif;
     }
-    
+
     h2 {
         text-align: center;
         margin-bottom: 20px;
     }
 
+    p {
+        font-weight: bold;
+    }
+
     table {
         width: 100%;
         border-collapse: collapse;
-        border-radius: 5px;
-        overflow: hidden;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
     }
 
     th,
     td {
-        padding: 12px 15px;
+        padding: 8px;
         text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-
-    th {
-        background-color: #f2f2f2;
-        color: #555;
-        text-transform: uppercase;
-        font-size: 12px;
     }
 
     tbody tr:nth-child(even) {
-        background-color: #f9f9f9;
+        background-color: lightgray;
     }
 </style>
 
@@ -78,37 +77,62 @@
     <p>名前: {{ $name }}</p>
     <p>メールアドレス: {{ $email }}</p>
     <table border="1" style="width: 100%; max-width: 100%;">
-      <thead>
-          <tr>
-              <th style="width: 10%;">商品名</th>
-              <th style="width: 5%;">数量</th>
-              <th style="width: 10%;">単価</th>
-              <th style="width: 10%;">金額</th>
-              <th style="width: 5%;">消費税</th>
-              <th style="width: 10%;">合計</th>
-              <th style="width: 10%;">支払い方法</th>
-              <th style="width: 10%;">発送日</th>
-              <th style="width: 10%;">注文日</th>
-              <th style="width: 20%;">備考</th>
-          </tr>
-      </thead>
-      <tbody>
-          @for ($i = 1; $i <= 30; $i++)
-          <tr>
-              <td>商品{{ $i }}</td>
-              <td>{{ rand(1, 10) }}</td>
-              <td>{{ rand(100, 1000) }}</td>
-              <td>{{ rand(100, 1000) * rand(1, 10) }}</td>
-              <td>{{ rand(5, 10) }}%</td>
-              <td>{{ rand(100, 1000) * rand(1, 10) }}</td>
-              <td>クレジットカード</td>
-              <td>{{ now()->addDays(rand(1, 10))->format('Y-m-d') }}</td>
-              <td>{{ now()->subDays(rand(1, 30))->format('Y-m-d') }}</td>
-              <td>備考{{ $i }}</td>
-          </tr>
-          @endfor
-      </tbody>
-  </table>
+        <thead>
+            <tr>
+                <th>商品名</th>
+                <th>数量</th>
+                <th>単価</th>
+                <th>金額</th>
+                <th>消費税</th>
+                <th>合計</th>
+                <th>支払い方法</th>
+                <th>発送日</th>
+                <th>注文日</th>
+                <th>備考</th>
+                <th>Test</th>
+                <th>Test</th>
+                <th>Test</th>
+                <th>Test</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for ($i = 1; $i <= 30; $i++)
+                <tr>
+                    <td>商品{{ $i }}</td>
+                    <td>{{ rand(1, 10) }}</td>
+                    <td>{{ rand(100, 1000) }}</td>
+                    <td>{{ rand(100, 1000) * rand(1, 10) }}</td>
+                    <td>{{ rand(5, 10) }}%</td>
+                    <td>{{ rand(100, 1000) * rand(1, 10) }}</td>
+                    <td>クレジットカード</td>
+                    <td>{{ now()->addDays(rand(1, 10))->format('Y-m-d') }}</td>
+                    <td>{{ now()->subDays(rand(1, 30))->format('Y-m-d') }}</td>
+                    <td>備考{{ $i }}</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                </tr>
+            @endfor
+        </tbody>
+    </table>
+    <form action="{{ route('dompdf.generate-pdf') }}" method="post">
+        @csrf
+        <input type="hidden" name="company_name" value="{{ $company_name }}">
+        <input type="hidden" name="name" value="{{ $name }}">
+        <input type="hidden" name="email" value="{{ $email }}">
+        <input type="hidden" name="date" value="{{ $date }}">
+        <p>方向を選択してください:</p>
+        <div>
+            <input type="radio" id="landscape" name="selectedOption" value="landscape" {{ $selectedOption === 'landscape' ? 'checked' : '' }}>
+            <label for="landscape">横</label>
+        </div>
+        <div>
+            <input type="radio" id="portrait" name="selectedOption" value="portrait" {{ $selectedOption === 'portrait' ? 'checked' : '' }}>
+            <label for="portrait">縦</label>
+        </div>
+        <input type="submit" value="Create PDf">
+    </form>
 </body>
 
 </html>
