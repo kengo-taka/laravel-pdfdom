@@ -72,6 +72,7 @@
 
 <body>
     <h2>請求書</h2>
+    <h2>dompdf</h2>
     <p>日付: {{ $date }}</p>
     <p>会社名: {{ $company_name }}</p>
     <p>名前: {{ $name }}</p>
